@@ -144,11 +144,11 @@ Access: [API TDD - Postman Documentation](https://documenter.getpostman.com/view
   - Delete
     - /api/orders/{id}
   - POST Order Product
-    - /api/orders/{id>/add-produc}
+    - /api/orders/{id}/add-product
   - POST remove Order Product
-    - /api/orders/{id>/remove-produc}
+    - /api/orders/{id}/remove-product
   - POST Send Order Creation E-mail
-    - /api/orders/{id>/send-mai}
+    - /api/orders/{id}/send-mail
 
 
 ## License <a name="license"></a>
