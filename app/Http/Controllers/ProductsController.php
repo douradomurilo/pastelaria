@@ -6,6 +6,7 @@ use App\Enums\ProductType;
 use App\Models\Product;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Enum;
 
@@ -27,16 +28,21 @@ class ProductsController extends Controller
          'price' => 'required',
          'type' => ['required', new Enum(ProductType::class)]
       ]);
-
+      
       if ($validator->fails()) {
          return response()->json($validator->messages());
       }
-
+      
       $product = new Product;
 
+      $imgDir = 'img/products';
+      $imgOriginalName = $request->photo->getClientOriginalName();
+
+      $request->photo->move('public/' . $imgDir, $imgOriginalName);
+      
       $product->code = $request->code;
       $product->name = $request->name;
-      $product->photo = $request->file('photo')->move('img/products', $request->file('photo')->getClientOriginalName());
+      $product->photo = $imgDir . '/' . $imgOriginalName;
       $product->price = $request->price;
       $product->type = $request->type;
 
@@ -67,10 +73,16 @@ class ProductsController extends Controller
 
       $product = Product::findOrFail($id);
       
-      $product->name = $request->input('name');
-      $product->price = $request->input('price');
-      $product->photo = $request->input('photo');
-      $product->type = $request->input('type');
+      File::delete($product->photo);
+      $imgDir = 'img/products';
+      $imgOriginalName = $request->photo->getClientOriginalName();
+
+      $request->photo->move('public/' . $imgDir, $imgOriginalName);
+
+      $product->name = $request->name;
+      $product->price = $request->price;
+      $product->photo = $imgDir . '/' . $imgOriginalName;
+      $product->type = $request->type;
       
       $product->save();
 

@@ -1,6 +1,8 @@
 <?php
 
 namespace Tests;
+
+use App\Models\Product;
 use Illuminate\Http\UploadedFile;
 
 class ProductTest extends TestCase
@@ -32,7 +34,10 @@ class ProductTest extends TestCase
      * /products/id [GET]
      */
     public function testShouldReturnProduct() {
-        $this->get("api/products/6", []);
+
+        $product = Product::factory()->createOne(['photo' => 'img/product/getproduct.png']);
+        
+        $this->get("api/products/" . $product->id, []);
         $this->seeStatusCode(200);
         $this->seeJsonStructure([
             'id',
@@ -53,28 +58,19 @@ class ProductTest extends TestCase
      */
     public function testShouldCreateProduct() {
 
-        $parameters = [
-            'code' => 'PASQUEIJ',
-            'name' => 'Pastel de Queijo',
-            'photo' => new UploadedFile('img/products/', 'queijo.png'),
-            'price' => 10.9,
-            'type' => 'pasteis'
-        ];
+        $product = Product::factory()->make();
 
-        $this->post("api/products", $parameters, []);
-        $this->seeStatusCode(200);
+        $this->post("api/products", $product->toArray(), []);
+        $this->seeStatusCode(201);
         $this->seeJsonStructure([
-            '*' => [
-                'id',
-                'code',
-                'name',
-                'photo',
-                'price',
-                'type',
-                'deleted_at',
-                'created_at',
-                'updated_at'
-            ]            
+            'id',
+            'code',
+            'name',
+            'photo',
+            'price',
+            'type',
+            'created_at',
+            'updated_at'
         ]);
         
     }
@@ -84,27 +80,20 @@ class ProductTest extends TestCase
      */
     public function testShouldUpdateProduct() {
 
-        $parameters = [
-            'name' => 'Pastel de Carne',
-            'photo' => 'img/products/queijo.png',
-            'price' => 10.9,
-            'type' => 'pasteis'
-        ];
+        $product = Product::factory()->createOne(['photo' => 'img/product/updateproduct.png']);
 
-        $this->put("api/products/6", $parameters, []);
+        $this->put("api/products/" . $product->id, Product::factory()->make()->toArray(), []);
         $this->seeStatusCode(200);
         $this->seeJsonStructure([
-            '*' => [
-                'id',
-                'code',
-                'name',
-                'photo',
-                'price',
-                'type',
-                'deleted_at',
-                'created_at',
-                'updated_at'
-            ]
+            'id',
+            'code',
+            'name',
+            'photo',
+            'price',
+            'type',
+            'deleted_at',
+            'created_at',
+            'updated_at'
         ]);
     }
 
@@ -112,11 +101,13 @@ class ProductTest extends TestCase
      * /products/id [DELETE]
      */
     public function testShouldDeleteProduct(){
+
+        $product = Product::factory()->createOne(['photo' => 'img/product/deleteproduct.png']);
         
-        $this->delete("api/products/6", [], []);
+        $this->delete("api/products/" . $product->id, [], []);
         $this->seeStatusCode(410);
         $this->seeJsonStructure([
-            'Produto removido com sucesso'
+            'success'
         ]);
     }
 
