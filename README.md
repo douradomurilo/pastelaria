@@ -37,7 +37,7 @@ The project is using TDD (Test Driven Development) with PHPUnit.
 - Produtos:
   - POST, PUT, GET List, GET with id, DELETE
 - Pedidos:
-  - POST, PUT, GET List, GET with id, DELETE, POST Order Products, POST remove Order Products
+  - POST, PUT, GET List, GET with id, DELETE, POST Order Products, POST remove Order Products, POST Send Order Creation E-mail
 - Build with Docker
 
 ## Installation <a name="installation"></a>
@@ -121,7 +121,7 @@ Access: [API TDD - Postman Documentation](https://documenter.getpostman.com/view
     - /api/clients/<id>
   - Delete
     - /api/clients/<id>
-- Produtos:
+- Products:
   - POST
     - /api/products
   - PUT
@@ -132,7 +132,7 @@ Access: [API TDD - Postman Documentation](https://documenter.getpostman.com/view
     - /api/products/<id>
   - Delete
     - /api/products/<id>
-- Pedidos:
+- Orders:
   - POST
     - /api/orders
   - PUT
@@ -147,6 +147,8 @@ Access: [API TDD - Postman Documentation](https://documenter.getpostman.com/view
     - /api/orders/<id>/add-product
   - POST remove Order Product
     - /api/orders/<id>/remove-product
+  - POST Send Order Creation E-mail
+    - /api/orders/<id>/send-mail
 
 
 ## License <a name="license"></a>
