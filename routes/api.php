@@ -43,5 +43,6 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
     $router->post('orders/{id}/add-product', 'OrdersController@addProduct');
     $router->post('orders/{id}/remove-product', 'OrdersController@removeProduct');
+    $router->post('orders/{id}/send-mail', 'OrdersController@sendMail');
 
 });

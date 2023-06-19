@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NewOrder;
+use App\Models\Client;
 use App\Models\Order;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class OrdersController extends Controller
 {
@@ -60,6 +63,8 @@ class OrdersController extends Controller
         $productId = $request->input('product_id');
         $order->products()->attach($productId);
 
+        dd($order->products);
+
         return response()->json("Produto #{$productId} adicionado ao pedido #{$id}");
     }
 
@@ -71,5 +76,16 @@ class OrdersController extends Controller
         $order->products()->detach($productId);
 
         return response()->json("Produto #{$productId} removido do pedido #{$id}");
+    }
+
+    public function sendMail($id): JsonResponse
+    {
+        $order = Order::findOrFail($id);
+
+        $client = Client::findOrFail($order->client_id);
+ 
+        Mail::to($client->email)->send(new NewOrder($order));
+
+        return response()->json("E-mail enviado para o cliente #{$client->id}. Pedido #{$id}");
     }
 }
