@@ -114,41 +114,41 @@ Access: [API TDD - Postman Documentation](https://documenter.getpostman.com/view
   - POST
     - /api/clients
   - PUT
-    - /api/clients/<id>
+    - /api/clients/{id}
   - GET List
     - /api/clients
   - GET one
-    - /api/clients/<id>
+    - /api/clients/{id}
   - Delete
-    - /api/clients/<id>
+    - /api/clients/{id}
 - Products:
   - POST
     - /api/products
   - PUT
-    - /api/products/<id>
+    - /api/products/{id}
   - GET List
     - /api/products
   - GET with id
-    - /api/products/<id>
+    - /api/products/{id}
   - Delete
-    - /api/products/<id>
+    - /api/products/{id}
 - Orders:
   - POST
     - /api/orders
   - PUT
-    - /api/orders/<id>
+    - /api/orders/{id}
   - GET List
     - /api/orders
   - GET with id
-    - /api/orders/<id>
+    - /api/orders/{id}
   - Delete
-    - /api/orders/<id>
+    - /api/orders/{id}
   - POST Order Product
-    - /api/orders/<id>/add-product
+    - /api/orders/{id>/add-produc}
   - POST remove Order Product
-    - /api/orders/<id>/remove-product
+    - /api/orders/{id>/remove-produc}
   - POST Send Order Creation E-mail
-    - /api/orders/<id>/send-mail
+    - /api/orders/{id>/send-mai}
 
 
 ## License <a name="license"></a>
