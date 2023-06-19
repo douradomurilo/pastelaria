@@ -62,6 +62,7 @@ class ClientsController extends Controller
          'name' => 'required',
          'email' => 'required|email|unique:clients',
          'phone' => 'required',
+         'birthdate' => 'required',
          'address' => 'required',
          'district' => 'required',
          'zipcode' => 'required'
@@ -92,6 +93,6 @@ class ClientsController extends Controller
       $client = Client::findOrFail($id);
       $client->delete();
 
-      return response()->json('Cliente removido com sucesso');
+      return response()->json(['success' => 'Cliente removido com sucesso'], 410);
    }
 }
