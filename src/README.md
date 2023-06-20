@@ -87,11 +87,11 @@ A `reports` directory has been created for code coverage report. Open the dashbo
 
 ### Postman Collection <a name="postman-collection"></a>
 
-Access: [API TDD - Postman Collection](https://www.postman.com/pastelaria-api-restfull-tdd/workspace/pastelaria)
+Access: [Pastelaria API Endpoints Collection](https://web.postman.co/workspace/Pastelaria~77dbe364-92b6-44e2-89d1-ac47017f620c/overview)
 
 ### Postman Documentation <a name="postman-documentation"></a>
 
-Access: [API TDD - Postman Documentation](https://documenter.getpostman.com/view/5349883/2s93sdYC8z)
+Access: [Pastelaria API Endpoints Collection - Postman Documentation](https://documenter.getpostman.com/view/1115812/2s93z3f5ii)
 
 ### API Endpoints <a name="api-endpoints"></a>
 
