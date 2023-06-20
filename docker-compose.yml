@@ -1,0 +1,37 @@
+version: '3.1'
+services:
+  lumen:
+    container_name: pastelaria_php
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./src:/var/www/html
+      - /var/www/html/vendor/
+    build: .
+    command: php -S lumen:8000 -t public
+    restart: always
+    networks:
+      - api
+  mysql:
+    image: mariadb:10.4
+    container_name: pastelaria_mysql
+    restart: unless-stopped
+    tty: true
+    volumes:
+      - database:/var/lib/mysql/
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=pastelaria
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+    ports:
+      - "3306:3306"
+    networks:
+      - api
+networks:
+  api:
+    driver: bridge
+
+volumes:
+  database:
+    driver: local
