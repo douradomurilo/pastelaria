@@ -44,6 +44,7 @@ The project is using TDD (Test Driven Development) with PHPUnit.
 
 - `git clone https://github.com/douradomurilo/pastelaria.git`
 - `cd pastelaria/`
+- `cd src/`
 - `composer install`
 - `cp .env.example .env`
 - Update `.env` and set your database credentials
@@ -53,19 +54,16 @@ The project is using TDD (Test Driven Development) with PHPUnit.
 
 ## Install with Docker <a name="install-with-docker"></a>
 
+- `git clone https://github.com/douradomurilo/pastelaria.git`
+- `cd pastelaria/`
+- `cd src/`
 - `docker-compose up -d`
-- `docker exec -it pastelaria /bin/bash`
+- `docker exec -it pastelaria_php bash`
 - `composer install`
 - `cp .env.example .env`
 - `php artisan migrate`
 - `php artisan db:seed`
-- Application http://localhost/
-- Adminer for Database http://localhost:8080/
-  - DBhost: 
-    - server:mysql
-    - user: root
-    - Password: root
-    - DataBase: pastelaria
+- Application http://localhost:8000/api/
 
 ## Unit Test <a name="unit-test"></a>
 
@@ -73,21 +71,8 @@ The project is using TDD (Test Driven Development) with PHPUnit.
 
 ```bash
 # run PHPUnit all test cases
-vendor/bin/phpunit
-# Feature test only
-vendor/bin/phpunit --testsuite Feature
-# Unit test only
-vendor/bin/phpunit --testsuite Unit
-```
-
-#### run PHPUnit in SAIL (Docker) <a name="run-phpunit-in-sail-docker"></a>
-```bash
-# run PHPUnit all test cases
-sail artisan test
-# Unit test only
-sail artisan test --testsuite Feature
-# Feature test only
-sail artisan test --testsuite Unit
+docker exec -it pastelaria_php bash
+vendor/bin/phpunit --testedox
 ```
 
 #### Code Coverage Report <a name="code-coverage-report"></a>
