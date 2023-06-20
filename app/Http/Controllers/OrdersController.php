@@ -28,12 +28,12 @@ class OrdersController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->messages());
         }
-
+        
         $order = new Order;
 
         $order->client_id = $request->client_id;
         $order->note = $request->note;
-        
+
         $order->save();
 
         return response()->json($order, 201);
@@ -62,7 +62,7 @@ class OrdersController extends Controller
         $order = Order::findOrFail($id);
         $order->delete();
 
-        return response()->json('Pedido removido com sucesso');
+        return response()->json(['success' => 'Pedido removido com sucesso'], 410);
     }
 
     public function addProduct(Request $request, $id): JsonResponse
@@ -80,7 +80,7 @@ class OrdersController extends Controller
         $productId = $request->input('product_id');
         $order->products()->attach($productId);
 
-        return response()->json("Produto #{$productId} adicionado ao pedido #{$id}");
+        return response()->json(['success' => "Produto #{$productId} adicionado ao pedido #{$id}"], 201);
     }
 
     public function removeProduct(Request $request, $id): JsonResponse
@@ -97,17 +97,15 @@ class OrdersController extends Controller
         $productId = $request->input('product_id');
         $order->products()->detach($productId);
 
-        return response()->json("Produto #{$productId} removido do pedido #{$id}");
+        return response()->json(['success' => "Produto #{$productId} removido do pedido #{$id}"], 410);
     }
 
     public function sendMail($id): JsonResponse
     {
         $order = Order::findOrFail($id);
-
-        $client = Client::findOrFail($order->client_id);
- 
-        Mail::to($client->email)->send(new NewOrder($order));
-
-        return response()->json("E-mail enviado para o cliente #{$client->id}. Pedido #{$id}");
+        
+        Mail::to($order->client->email)->send(new NewOrder($order));
+        
+        return response()->json(['success' => "E-mail enviado para o cliente #{$order->client->id}. Pedido #{$id}"]);
     }
 }

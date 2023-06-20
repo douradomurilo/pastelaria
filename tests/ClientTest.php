@@ -38,7 +38,7 @@ class ClientTest extends TestCase
      */
     public function testShouldReturnClient() {
 
-        $client = Client::factory()->create();
+        $client = Client::factory()->createOne();
 
         $this->get("api/clients/".$client->id, []);
         $this->seeStatusCode(200);
@@ -91,7 +91,7 @@ class ClientTest extends TestCase
      */
     public function testShouldUpdateClient() {
 
-        $client = Client::factory()->create();
+        $client = Client::factory()->createOne();
 
         $this->put("api/clients/" . $client->id, Client::factory()->make()->toArray(), []);
         $this->seeStatusCode(200);
@@ -116,7 +116,7 @@ class ClientTest extends TestCase
      */
     public function testShouldDeleteClient() {
         
-        $client = Client::factory()->create();
+        $client = Client::factory()->createOne();
 
         $this->delete("api/clients/" . $client->id, [], []);
         $this->seeStatusCode(410);
